@@ -1,5 +1,10 @@
 #0-1 knapsack DP
 
+# n=number of objects
+# m=maximum weight 
+# w=list of weights of objects
+# p=list of values of objects
+
 def knapsack(n,m,w,p):
     dp=[[0 for j in range(m+1)]for i in range(n+1)]
     for i in range(1,n+1):

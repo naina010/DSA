@@ -1,0 +1,46 @@
+#Longest Palindromic Subsequence DP
+
+def print_lps(a,dp,b):
+    i,j=0,len(a)-1
+    lpal=['']*dp[0][-1]
+    c=0
+    while j>=i:
+        if b[i][j]=='diagnol':
+            lpal[c] = a[j]
+            lpal[len(lpal) - c - 1] = a[j]
+            i+=1
+            j-=1
+            c+=1
+        elif b[i][j]=='left':
+            if dp[i][j-1]==0:
+                lpal[len(lpal)-c-1]=a[j]
+            j-=1
+        else:
+            if dp[i+1][j]==0:
+                lpal[len(lpal)-c-1]=a[i]
+                break
+            i+=1
+    ps=''.join(lpal)
+    
+
+def lps(s):
+    dp=[[0 for i in range(len(s))] for j in range(len(s))]
+    b=[['left' for i in range(len(s))] for j in range(len(s))]
+    for i in range(len(s)):
+        dp[i][i]=1
+        
+    for l in range(2,len(s)+1):
+        for i in range(len(s)-l+1):
+            j=i+l-1
+            if s[i]==s[j]:
+                dp[i][j]=dp[i+1][j-1]+2
+                b[i][j]='diagnol'
+            else:
+                if dp[i][j-1]>=dp[i+1][j]:
+                    dp[i][j]=dp[i][j-1]
+                    b[i][j]='left'
+                else:
+                    dp[i][j]=dp[i+1][j]
+                    b[i][j]='down'
+                    
+                    

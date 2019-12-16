@@ -11,6 +11,9 @@ def print_coin(a,dp,t):
             j-=a[i]
     print(*coin)
 
+# a=list of coin values
+# t=value to exchange
+
 def coinChange(a,t):
     a.insert(0, 0)
     n=len(a)

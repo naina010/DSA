@@ -1,0 +1,30 @@
+#Subset Sum DP
+
+def print_subset(a,dp,t):
+    res=[]
+    i,j=len(dp)-1,t
+    while i>0 and j>0:
+        if dp[i-1][j]=='T':
+            i-=1
+        else:
+            res.append(a[i])
+            j-=a[i]
+
+def subsetSum(a,t):
+    dp=[['F' for p in range(t+1)]for w in range(len(a)+1)]
+    for r in range(len(a)+1):
+        dp[r][0]='T'
+    a.insert(0,0)
+    
+    for i in range(1,len(a)):
+        for j in range(1,t+1):
+            if dp[i-1][j]=='T':
+                dp[i][j]='T'
+            elif (j-a[i])>-1:
+                if dp[i-1][j-a[i]]=='T':
+                    dp[i][j]='T'
+     
+    if dp[-1][-1]=='T':
+        print_subset(a,dp,t)
+    else:
+        print('No such subset')

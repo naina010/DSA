@@ -1,0 +1,22 @@
+#Longest Common Substring DP
+
+def print_lc_substring(dp,x,k1,k2):
+    i,j=k1,k2
+    ss=''
+    while dp[i][j]!=0:
+        ss=x[i-1]+ss
+        i-=1
+        j-=1
+
+def lc_substring(x,y):
+    mx=0
+    k1,k2=0,0
+    dp=[[0 for j in range(len(y)+1)]for i in range(len(x)+1)]
+    for i in range(1,len(x)+1):
+        for j in range(1,len(y)+1):
+            if x[i-1]==y[j-1]:
+                dp[i][j]=dp[i-1][j-1]+1
+                if mx<dp[i][j]:
+                    mx=dp[i][j]
+                    k1,k2=i,j
+  

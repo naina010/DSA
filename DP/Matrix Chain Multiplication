@@ -1,0 +1,29 @@
+#Matrix Chain Multiplication DP
+
+def print_optimal_parens(s,i,j):
+    if i==j:
+        mat='A'+str(i)
+        print(mat,end='')
+    else:
+        print('(',end='')
+        print_optimal_parens(s,i,s[i][j])
+        print_optimal_parens(s,s[i][j]+1,j)
+        print(')',end='')
+
+def mcm(n,p):
+    f=float('inf')
+    m=[[-1 for i in range(n+1)]for j in range(n+1)]
+    s=[[-1 for p in range(n+1)]for w in range(n+1)]
+    for i in range(n+1):
+        m[i][i]=0
+    for l in range(2,n+1):
+        for i in range(1,n-l+2):
+            j=i+l-1
+            m[i][j]=f
+            for k in range(i, j):
+                q=m[i][k]+m[k+1][j]+(p[i-1]*p[k]*p[j])
+                if q<m[i][j]:
+                    m[i][j]=q
+                    s[i][j]=k
+    print('Minimum cost:',m[1][-1])
+    print_optimal_parens(s,1,n)

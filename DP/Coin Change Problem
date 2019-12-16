@@ -1,0 +1,34 @@
+#Coin Change Problem DP
+
+def print_coin(a,dp,t):
+    i,j=len(dp)-1,t
+    coin=[]
+    while i>0 and j>0:
+        if dp[i-1][j]==dp[i][j]:
+            i-=1
+        else:
+            coin.append(a[i])
+            j-=a[i]
+    print(*coin)
+
+def coinChange(a,t):
+    a.insert(0, 0)
+    n=len(a)
+    dp=[[0 for i in range(t+1)]for j in range(n)]
+    for j in range(t+1):
+        if j%a[1]==0:
+            dp[1][j]=j//a[1]
+
+    for i in range(2,n):
+        for j in range(1,t+1):
+            if j<a[i]:
+                dp[i][j]=dp[i-1][j]
+            elif j==a[i]:
+                dp[i][j]=1
+            elif dp[i][j-a[i]]==0:
+                dp[i][j] = dp[i - 1][j]
+            else:
+                if dp[i-1][j]!=0:
+                    dp[i][j]=min(dp[i][j-a[i]]+1,dp[i-1][j])
+                else:
+                    dp[i][j] = dp[i][j-a[i]]+1

@@ -1,0 +1,32 @@
+#Longest Common Subsequence DP
+
+def print_lcs(b,x,i,j):
+    if i==0 or j==0:
+        return
+    if b[i][j]=='diagnol':
+        print_lcs(b,x,i-1,j-1)
+        print(x[i-1],end='')
+    elif b[i][j]=='up':
+        print_lcs(b,x,i-1,j)
+    else:
+        print_lcs(b,x,i,j-1)
+
+
+def lcs(x,y):
+    dp=[[0 for _ in range(len(y)+1)]for __ in range(len(x)+1)]
+    b=[['up' for _ in range(len(y)+1)]for __ in range(len(x)+1)]
+    for i in range(1,len(x)+1):
+        for j in range(1,len(y)+1):
+            if x[i-1]==y[j-1]:
+                dp[i][j]=dp[i-1][j-1]+1
+                b[i][j]='diagnol'
+            else:
+                if dp[i-1][j]>=dp[i][j-1]:
+                    dp[i][j]=dp[i-1][j]
+                    b[i][j]='up'
+                else:
+                    dp[i][j] = dp[i][j-1]
+                    b[i][j] = 'left'
+   
+    print('Length of LCS:',dp[-1][-1])
+   

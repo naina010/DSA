@@ -1,0 +1,23 @@
+#BFS
+
+from collections import deque, defaultdict
+
+def bfs(source):
+    q = deque([])                       
+    visited = [False] * (n + 1)         # mark True if node is visited
+    level = [0] * (n + 1)               # define level of node, level[source_node]=1
+    visited[source] = True                  
+    level[source] = 1
+    q.appendleft(source)
+    while q:
+        current = q.pop()
+        for node in adj[current]:
+            if visited[node] == False:
+                visited[node] = True
+                level[node] = level[current] + 1
+                q.appendleft(node)
+
+adj = defaultdict(list)          # adj[node] stores the adjacent vertices of node
+
+# for _ in range(edges):       
+#     adj[edges[0]].append(edges[1])

@@ -1,0 +1,15 @@
+#DFS
+
+from collections import defaultdict
+
+def dfs(s):
+    stack.append(s)
+    visited[s] = True
+
+    for node in adj[s]:
+        if visited[node] == False:
+            dfs(node)
+
+stack=[]
+visited = [False] * (n + 1)          # mark True if node is visited, n is number of nodes
+adj = defaultdict(list)

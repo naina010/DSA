@@ -1,0 +1,45 @@
+# Kruskal's Algorithm
+
+size = [1] * (n + 1)
+parent = [i for i in range(n + 1)]
+
+def root(a):
+    while parent[a] != a:
+        parent[a] = parent[parent[a]]
+        a = parent[a]
+    return a
+
+def union(a, b):
+    a = root(a)
+    b = root(b)
+    if a == b:
+        return
+    elif size[a] <= size[b]:
+        parent[a] = b
+        size[b] += size[a]
+        size[a] = 0
+    else:
+        parent[b] = a
+        size[a] += size[b]
+        size[b] = 0
+
+
+def kruskal(edges):
+    min_cost = 0
+    for e in edges:
+        a = e[1][0]
+        b = e[1][1]
+        w = e[0]
+        if root(a) != root(b):
+            union(a, b)
+            min_cost += w
+    return min_cost
+
+
+n, m = map(int, input().split())
+edges = []
+for _ in range(m):
+    a, b, w = map(int, input().split())
+    edges.append([w, (a, b)])
+edges.sort()
+print(kruskal(edges))

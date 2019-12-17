@@ -1,0 +1,32 @@
+#Prims's Algorithm
+
+from collections import defaultdict
+from heapq import heapify, heappush, heappop
+
+def prims(s):
+    min_cost = 0
+    q = []
+    heapify(q)                   # Priority queue
+    heappush(q, [0, s])
+    visited = [False] * (n + 1)
+    
+    while q:
+        x = heappop(q)
+        y = x[1]
+        if not visited[y]:
+            visited[y] = True
+            min_cost += x[0]
+            for new in adj[y]:
+                if not visited[new[1]]:
+                    heappush(q, new)
+    return min_cost
+
+
+n, m = map(int, input().split())
+adj = defaultdict(list)
+for _ in range(m):
+    a, b, w = map(int, input().split())
+    adj[a].append([w, b])
+    adj[b].append([w, a])
+
+print(prims(1))

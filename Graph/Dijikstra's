@@ -1,0 +1,33 @@
+#Dijikstra's Algorithm
+
+from collections import defaultdict
+from heapq import heapify, heappush, heappop
+
+def dijikstra(s):
+    visited = [False] * (n + 1)
+    dist = [float('inf')] * (n + 1)
+    q = []
+    heapify(q)
+    heappush(q, [0, s])
+    dist[s] = 0
+
+    while q:
+        x = heappop(q)
+        w = x[0]
+        y = x[1]
+        if not visited[y]:
+            visited[y] = True
+            for new in adj[y]:
+                wt = new[0]
+                v = new[1]
+                if dist[y] + wt < dist[v]:
+                    dist[v] = dist[y] + wt
+                    heappush(q, [dist[v], v])
+    return dist
+
+
+
+#adj = defaultdict(list)
+#for _ in range(edges):
+#    a, b, w = map(int, input().split()) 
+#    adj[a].append([w, b])    # directed edge from a to b with weight w

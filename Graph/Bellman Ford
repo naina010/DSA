@@ -1,0 +1,28 @@
+# Bellman Ford's Algorithm
+
+from collections import defaultdict
+
+inf = float('inf')
+
+def bellman(s):
+    dist = [inf] * (n + 1)
+    dist[s] = 0
+    j = 1
+    
+    while j < n:
+        for e in adj:
+            for x in adj[e]:
+                y = x[1]
+                wt = x[0]
+                if dist[e] + wt < dist[y]:
+                    dist[y] = dist[e] + wt
+        j += 1
+
+    return dist
+
+
+
+
+#adj = defaultdict(list)  # adjacency list for nodes : [weight, vertex]
+
+

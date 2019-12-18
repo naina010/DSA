@@ -1,0 +1,19 @@
+# Floyd-Warshall Algorithm
+
+def floyd_warshall(graph):
+    dist=graph[:]
+    v=len(graph)
+    
+    for k in range(v):
+        for i in range(v):
+            for j in range(v):
+                dist[i][j]=min(dist[i][j], dist[i][k]+dist[k][j])
+    return dist
+
+inf=float('inf')
+graph = [[0, 5, inf, 10],
+         [inf, 0, 3, inf],
+         [8, inf, 0, 1],
+         [inf, 7, inf, 0]]
+
+dist=floyd_warshall(graph)

@@ -1,0 +1,48 @@
+# Topological sort
+
+from collections import defaultdict
+
+visited=defaultdict(bool)
+stack=[]
+
+
+# function to visit the adjacent nodes of current vertex
+def topological_sort_util(adj,vertex):
+    visited[vertex]=True
+    for node in adj[vertex]:
+        if not visited[node]:
+            topological_sort_util(adj,node)
+
+    stack.append(vertex)
+
+def topological_sort(adj):
+    # select vertices of graph one by one until all visited
+    for vertex in adj:
+        if not visited[vertex]:
+            topological_sort_util(adj,vertex)
+
+    return stack[::-1]
+
+
+adj=defaultdict(list)
+
+# Consider a graph containing following edges 
+# A -> C
+# B -> C
+# B -> E
+# C -> D
+# D -> F
+# E -> F
+# F -> G
+
+# Create DAG
+
+adj['A']=['C']          
+adj['B']=['C','E']
+adj['C']=['D']
+adj['D']=['F']
+adj['E']=['E']
+adj['F']=['G']
+adj['G']=[]
+print(*topological_sort(adj))
+

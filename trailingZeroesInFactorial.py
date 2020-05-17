@@ -1,4 +1,4 @@
-# 12may2020
+# Returns number of trailing zeroes in n!
 
 def trailing_zeroes_in_factorial(n):
     z=0
@@ -6,5 +6,3 @@ def trailing_zeroes_in_factorial(n):
         z+=n//5
         n=n//5
     return z
-
-# print(trailing_zeroes_in_factorial(200))

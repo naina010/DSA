@@ -1,4 +1,4 @@
-# 12may2020
+# Seive algorithms to find prime numbers
 
 def sieve(n):
     prime = [1]*(n+1)
@@ -8,6 +8,3 @@ def sieve(n):
             for j in range(i**2,n+1,i):
                 prime[j]=0
     return prime
-# p=sieve(100)
-# for i in range(100):
-#     if p[i]: print(i, end=' ')

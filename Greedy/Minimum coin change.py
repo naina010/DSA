@@ -1,5 +1,5 @@
 
-# may not work for all denominations
+# may not work for all denominations => Prefer DP
 
 def minimum_coins(deno, change, n):
     deno.sort(reverse=True)

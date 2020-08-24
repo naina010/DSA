@@ -1,7 +1,3 @@
-# 12nov19
-# Weighted Job Scheduling DP
-# O(N*logN)
-
 from bisect import bisect_right
 
 def job_schedule(t,p):
